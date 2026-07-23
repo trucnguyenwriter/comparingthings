@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Grammar Master - Comparing & Contrast</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#fdfbf7',
+                            100: '#f7f3eb',
+                            200: '#efe6d5',
+                            300: '#e5d5be',
+                        },
+                        amberPastel: '#fef3c7',
+                        terracotta: '#9a3412',
+                        sage: {
+                            50: '#f4f7f4',
+                            100: '#e3ebe3',
+                            500: '#527853',
+                            700: '#2e432f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #faf8f5;
+            color: #292524;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1ece1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d6c7b2;
+            border-radius: 8px;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(120, 100, 80, 0.06), 0 2px 6px -1px rgba(120, 100, 80, 0.04);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        const GRAMMAR_DATA = [
+            {
+                id: 'mod_1',
+                sectionNumber: '1',
+                englishCategory: 'Comparing Adjectives',
+                tag: 'Adjective Spectrum & Degree Shift',
+                badgeColor: 'border-amber-300 text-amber-900 bg-amber-50',
+                borderColor: 'border-amber-200',
+                accentBg: 'bg-amber-50/50',
+                nativeLogic: {
+                    title: 'Mental Slider & Group Apex Mindset',
+                    coreConcept: 'Native English speakers visualize adjectives as continuous dials or spectrums. A comparative adjective shifts the dial between two items or two distinct timestamps. A superlative zooms out to an entire set to locate the single item sitting at the absolute apex point.',
+                    visualMetaphor: '📊 [Base: hard] ➔ 📈 [Slider Shift: harder than...] ➔ 🏆 [Apex Peak: the hardest]\n⏱️ [Time Delta: fitter than last year] ➔ 👥 [Set Leader: the most generous person]',
+                    keyInsights: [
+                        'Short single-syllable words add short inflectional suffixes (-er / -est) to maintain natural spoken rhythm.',
+                        'Multi-syllable words use "more / most" as external pre-modifiers to prevent clumsy, hard-to-pronounce word tails.',
+                        'The marker "than" serves as a comparison fulcrum anchoring the secondary benchmark.'
+                    ]
+                },
+                tables: [
+                    {
+                        title: 'Adjective Formation Rules Table',
+                        headers: ['Adjective Type', 'Comparative Structure', 'Superlative Structure'],
+                        rows: [
+                            { type: 'One syllable: hard', comp: 'adjective + -er: harder', sup: 'the + adjective + -est: the hardest' },
+                            { type: 'One syllable ending in -e: nice', comp: 'adjective + -r: nicer', sup: 'the + adjective + -st: the nicest' },
+                            { type: 'One syllable ending in vowel + consonant: fat', comp: 'consonant doubled + -er: fatter', sup: 'the + adjective + consonant doubled + -est: the fattest' },
+                            { type: 'Two syllables ending in -y: happy', comp: 'adjective -y + -ier: happier', sup: 'the + adjective -y + -iest: the happiest' },
+                            { type: 'Two or more syllables: enjoyable', comp: 'more + adjective: more enjoyable', sup: 'the most + adjective: the most enjoyable' },
+                            { type: 'Irregular: good, bad, far', comp: 'better, worse, further/farther', sup: 'the best, the worst, the furthest/farthest' }
+                        ]
+                    }
+                ],
+                subsections: [
+                    {
+                        title: 'Comparative Adjectives Structure & Usage',
+                        englishKeyword: 'Binary Comparison & Time Delta',
+                        rules: [
+                            {
+                                text: 'Used to compare two or more things, people, or places:',
+                                examples: ['Younger runners will always be faster than older runners.']
+                            },
+                            {
+                                text: 'Used to compare the same thing, person, or place at two different times:',
+                                examples: ['I\'m much fitter than I was last year.']
+                            },
+                            {
+                                text: 'We use "than" after comparative adjectives to introduce the item being compared against.',
+                                examples: ['Faster than older runners.']
+                            },
+                            {
+                                text: 'Contextual Omission: The "than-clause" is omitted when the comparison point is clear from context.',
+                                examples: ['Older athletes are getting faster and fitter. (implied: than in the past)']
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Superlative Adjectives & Modifiers',
+                        englishKeyword: 'Apex Comparison & Superlative Modifiers',
+                        rules: [
+                            {
+                                text: 'Used to compare one thing in a group with all the others in that group:',
+                                examples: ['The Olympics is probably the most exciting sports event in the sports calendar.']
+                            },
+                            {
+                                text: 'Modifying superlatives with subset focus:',
+                                bulletPoints: [
+                                    {
+                                        label: 'one of the / some of the + superlative + plural noun',
+                                        examples: [
+                                            'It\'s one of the few chances we get to see some of the best athletes in the world competing against each other.',
+                                            'Tamsin is one of the most generous people I know.'
+                                        ]
+                                    },
+                                    {
+                                        label: 'ordinal numbers + superlative',
+                                        examples: ['Our team was the third best in the competition.']
+                                    }
+                                ]
+                            },
+                            {
+                                text: 'Possessive Substitution: We can replace "the" with a possessive pronoun/determiner:',
+                                examples: ['my best friend', 'his greatest achievement']
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'mod_2',
+                sectionNumber: '2',
+                englishCategory: 'Comparing Adverbs',
+                tag: 'Action Manner & Velocity Calibration',
+                badgeColor: 'border-purple-300 text-purple-900 bg-purple-50',
+                borderColor: 'border-purple-200',
+                accentBg: 'bg-purple-50/50',
+                nativeLogic: {
+                    title: 'Action Dynamics & Manner Scaling',
+                    coreConcept: 'Adverbs measure the execution of actions. Native speakers evaluate how actions unfold by adding dynamic comparative markers. Standard "-ly" adverbs require "more/most" to avoid awkwardly stacking "-lier" onto multi-syllables.',
+                    visualMetaphor: '🏃 [Action Base: speed up] ➔ ⚡ [Manner Scaling: more rapidly than...] ➔ 🥇 [Maximum Delta: improved the most markedly]',
+                    keyInsights: [
+                        'Adverbs derived with "-ly" strictly use "more/most" for comparative clarity.',
+                        'Flat adverbs (adverbs with identical adjective forms like hard, fast, late, early, quick) take traditional -er/-est suffixes.',
+                        'Irregular adverbs follow dedicated stem shifts (well ➔ better ➔ best; badly ➔ worse ➔ worst).'
+                    ]
+                },
+                subsections: [
+                    {
+                        title: 'Standard & Flat Adverbial Comparisons',
+                        englishKeyword: 'Manner Adverb Modifiers & Flat Adverbs',
+                        rules: [
+                            {
+                                text: 'Standard manner adverbs compare how actions are performed using "more/most + adverb":',
+                                examples: [
+                                    'Runners aged 50 and over are speeding up more rapidly than younger people.',
+                                    'Women aged 60 to 68 improved the most markedly.'
+                                ]
+                            },
+                            {
+                                text: 'Flat Adverbs (same form as adjective: hard, fast, straight, late, early, quick) add "-er/-est":',
+                                examples: ['Women aged 60 to 68 run on average four minutes faster each year.']
+                            },
+                            {
+                                text: 'Irregular adverbs forms:',
+                                examples: [
+                                    'well ➔ better ➔ best',
+                                    'badly ➔ worse ➔ worst',
+                                    'far ➔ further ➔ furthest',
+                                    'little ➔ less ➔ least',
+                                    'Example: I did worse than I had expected in the exam, so I was disappointed.'
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'mod_3',
+                sectionNumber: '3',
+                englishCategory: 'Other Ways of Comparing',
+                tag: 'Scale Modifiers, Equivalence & Dynamic Ratios',
+                badgeColor: 'border-sky-300 text-sky-900 bg-sky-50',
+                borderColor: 'border-sky-200',
+                accentBg: 'bg-sky-50/50',
+                nativeLogic: {
+                    title: 'Intensity Calibration, Equivalence Brackets & Linked Levers',
+                    coreConcept: 'Native speakers tune comparison distance using specific emphasis words. Equivalence ("as...as") creates a balanced bracket holding two concepts at equal height. The "the... the..." pattern creates two synchronized physical levers.',
+                    visualMetaphor: '⚖️ [Equivalence Bracket: as old as] | 🎚️ [Degree Zoom: much greater / significantly higher] | ⚙️ [Linked Levers: The longer... the greater...]',
+                    keyInsights: [
+                        'NEVER combine "very" with comparative adjectives (e.g., NOT "very lower" ❌). Use "much", "far", or "slightly".',
+                        'Progressive repeating comparatives ("better and better") indicate continuous directional momentum.',
+                        'Proportional parallel changes use "the + comparative ..., the + comparative ...".'
+                    ]
+                },
+                subsections: [
+                    {
+                        title: 'Opposite Comparison & Emphasis Modifiers',
+                        englishKeyword: 'Reverse Comparison & Degree Intensifiers',
+                        rules: [
+                            {
+                                text: 'Using "less / the least" to mean the opposite of "more / the most":',
+                                examples: [
+                                    'You might imagine that the Masters Games would be less exciting to watch.',
+                                    'That was probably the least enjoyable meal I\'ve ever had!'
+                                ]
+                            },
+                            {
+                                text: 'Adding emphasis to comparatives:',
+                                bulletPoints: [
+                                    {
+                                        label: 'Informal / General: even, far, a great deal, a little, a lot, much + comparative',
+                                        examples: ['Older women showed much greater increases in speed than expected.']
+                                    },
+                                    {
+                                        label: 'Formal English: slightly, considerably, significantly + comparative',
+                                        examples: [
+                                            'The figures for 2003 were significantly higher than those for the year 2000.',
+                                            'The number of women in higher education was only slightly lower than the number of men.'
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                isWarning: true,
+                                textWarning: 'PROHIBITED PITFALL: We CANNOT use "very" directly with comparatives!',
+                                examples: ['❌ Incorrect: not the number of women was very lower.', '✅ Correct: ... was much lower / significantly lower.']
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Equivalence, Multipliers & Dynamic Progression',
+                        englishKeyword: 'Equivalence Brackets, Ratios & Parallel Synchronized Variation',
+                        rules: [
+                            {
+                                text: 'Equivalence & Similarity ("as + adjective/adverb + as"):',
+                                examples: [
+                                    'My car is as old as yours. (= two cars are the same age)',
+                                    'Older athletes are as likely to achieve their peak fitness as younger athletes.'
+                                ]
+                            },
+                            {
+                                text: 'Adding degree/multipliers before "as...as":',
+                                examples: [
+                                    'In 2005, our team was almost as successful as in 2003.',
+                                    'He can run twice as fast as the others in his team.'
+                                ]
+                            },
+                            {
+                                text: 'Difference / Non-equivalence ("not as + adjective/adverb + as"):',
+                                examples: ['While they may not be as fast as their younger counterparts...']
+                            },
+                            {
+                                text: 'Progressive Change Over Time (repeating comparative):',
+                                examples: [
+                                    'Each year athletes seem to be getting better and better.',
+                                    'Our atmosphere is gradually becoming more and more polluted.',
+                                    'It seems less and less likely that there will be a general election this year.'
+                                ]
+                            },
+                            {
+                                text: 'Parallel Synchronized Variation ("the + comparative ..., the + comparative ..."):',
+                                examples: [
+                                    'It would seem that the longer athletes keep competing the greater their chances of setting new records are.',
+                                    'The sooner the better.'
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'mod_4',
+                sectionNumber: '4',
+                englishCategory: 'Comparing Quantities',
+                tag: 'Discrete vs. Continuous Quantities',
+                badgeColor: 'border-emerald-300 text-emerald-900 bg-emerald-50',
+                borderColor: 'border-emerald-200',
+                accentBg: 'bg-emerald-50/50',
+                nativeLogic: {
+                    title: 'Countable Discrete Units vs. Uncountable Mass Calibration',
+                    coreConcept: 'Native speakers strictly categorize quantity into separate countable units versus continuous uncountable fluid masses. "Fewer" measures individual blocks; "less" measures uncountables.',
+                    visualMetaphor: '📦 Countable (fewer women / many more opportunities) vs. 🌊 Uncountable (less information / much more training)',
+                    keyInsights: [
+                        '"Fewer" is exclusively paired with plural countable nouns.',
+                        '"Less" is exclusively paired with uncountable nouns.',
+                        '"More" and "most" work universally across both countable and uncountable nouns.'
+                    ]
+                },
+                tables: [
+                    {
+                        title: 'Quantifier Comparison Spectrum',
+                        headers: ['Quantifier Base', 'Comparative Form', 'Superlative Form'],
+                        rows: [
+                            { type: 'a lot / much / many', comp: 'more', sup: 'the most' },
+                            { type: 'a few', comp: 'fewer (+ plural countable noun)', sup: 'the fewest (+ plural countable noun)' },
+                            { type: 'a little', comp: 'less (+ uncountable noun)', sup: 'the least (+ uncountable noun)' }
+                        ]
+                    }
+                ],
+                subsections: [
+                    {
+                        title: 'Quantifier Usage Rules & Emphasis',
+                        englishKeyword: 'Discrete vs Continuous Quantity Calibration',
+                        rules: [
+                            {
+                                text: 'Comparing quantities with "more" or "most" for both plural or uncountable nouns:',
+                                examples: ['Today\'s top sportspeople receive a lot more money than in the past.']
+                            },
+                            {
+                                text: 'Using "fewer/fewest" vs "less/least":',
+                                examples: [
+                                    '25 years ago few 60-year-old men and even fewer women would have considered running a marathon.',
+                                    'There used to be less information available about fitness.'
+                                ]
+                            },
+                            {
+                                text: 'Adding emphasis to quantity comparisons:',
+                                bulletPoints: [
+                                    {
+                                        label: 'a lot / many + more / fewer + plural countable noun',
+                                        examples: ['Increased sponsorship has given today\'s athletes many more opportunities to succeed.']
+                                    },
+                                    {
+                                        label: 'a lot / much + more / less + uncountable noun',
+                                        examples: ['Today\'s athletes need to do much more training than in the past.']
+                                    },
+                                    {
+                                        label: 'repeating quantifiers for progressive trend',
+                                        examples: ['So much in our society is about making more and more money.']
+                                    }
+                                ]
+                            },
+                            {
+                                text: 'Similarity / Difference in quantities using "(not) as many/much (+ noun) + as":',
+                                examples: ['There aren\'t as many people doing sports at school (as there used to be).']
+                            },
+                            {
+                                text: 'Quantity Multipliers and Specific Ratios:',
+                                examples: [
+                                    'In 2004 China won nearly twice as many silver medals as the US.',
+                                    'The US won more than three times as many medals as Great Britain.'
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'mod_5',
+                sectionNumber: '5',
+                englishCategory: 'Grammar Extra: Comparing Nouns',
+                tag: 'Nominal Similarity & Resemblance Markers',
+                badgeColor: 'border-rose-300 text-rose-900 bg-rose-50',
+                borderColor: 'border-rose-200',
+                accentBg: 'bg-rose-50/50',
+                nativeLogic: {
+                    title: 'Analogy, Identical Degree & Resemblance Alignment',
+                    coreConcept: 'When comparing overall nouns rather than specific dimensions, native speakers use "like" to project vivid analogies, "the same (as)" to state identical value, and "similar to" for general likeness.',
+                    visualMetaphor: '🪞 [Analogy: swim like a fish] ↔️ [Exact Identity: the same degree as] ↔️ [Proximity: similar to this film]',
+                    keyInsights: [
+                        '"like" introduces an illustrative simile or analogy.',
+                        '"the same (as)" highlights 100% exact parity.',
+                        '"similar to" expresses strong likeness without claiming exact identity.'
+                    ]
+                },
+                subsections: [
+                    {
+                        title: 'Noun Comparison Expressions',
+                        englishKeyword: 'Analogy, Identity & Similarity Markers',
+                        rules: [
+                            {
+                                text: 'We can compare how similar things are using "like", "the same (as)", and "similar to":',
+                                examples: [
+                                    'Older athletes can achieve the same degree of physical improvement as those in their twenties and thirties.',
+                                    'He swims like a fish.',
+                                    'This film is similar to this director\'s last one.'
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        const FLASHCARDS = [
+            {
+                id: 'fc_1',
+                category: 'Comparing Adjectives',
+                question: 'Why do short adjectives take "-er/-est" while long adjectives take "more/most"?',
+                hint: 'Rhythm and spoken cadence',
+                answer: 'Native English speech prioritizes rhythmic balance. Single-syllable words easily accept short suffix beats (-er/-est). Multi-syllable words (e.g., enjoyable) would sound unwieldy with added suffixes, so native speakers use "more/most" as external pre-modifiers.'
+            },
+            {
+                id: 'fc_2',
+                category: 'Comparing Adjectives',
+                question: 'How do you modify a superlative to state that someone belongs to a top elite group?',
+                hint: 'Structure using plural nouns',
+                answer: 'Use "one of the / some of the + superlative + PLURAL noun". Example: "Tamsin is one of the most generous people I know."'
+            },
+            {
+                id: 'fc_3',
+                category: 'Comparing Adverbs',
+                question: 'What is the comparative rule for adverbs ending in "-ly" vs "flat adverbs"?',
+                hint: 'Rapidly vs Fast',
+                answer: 'Adverbs ending in "-ly" strictly use "more + adverb" (more rapidly). Flat adverbs that share identical forms with adjectives (fast, hard, early, late) take inflectional suffixes (-er/-est, e.g., run faster).'
+            },
+            {
+                id: 'fc_4',
+                category: 'Other Ways of Comparing',
+                question: 'Why is "very lower" incorrect in English? What should you use instead?',
+                hint: 'Prohibited Comparative Intensifier',
+                answer: '"Very" cannot directly modify comparative forms. Native speakers use "much lower", "far lower", "significantly lower", or "slightly lower".'
+            },
+            {
+                id: 'fc_5',
+                category: 'Other Ways of Comparing',
+                question: 'How do native speakers express two synchronized changing factors that move together?',
+                hint: 'Dynamic ratio levers structure',
+                answer: 'Use "the + comparative ..., the + comparative ...". Example: "The longer athletes keep competing, the greater their chances of setting new records are."'
+            },
+            {
+                id: 'fc_6',
+                category: 'Comparing Quantities',
+                question: 'When should you use "fewer" vs "less"?',
+                hint: 'Countable units vs Uncountable mass',
+                answer: '"Fewer" is used exclusively with plural countable nouns (fewer women, fewer opportunities). "Less" is used strictly with uncountable nouns (less information, less training).'
+            },
+            {
+                id: 'fc_7',
+                category: 'Comparing Nouns',
+                question: 'What are the three main keywords used to compare noun similarity directly?',
+                hint: 'Analogy, identity, and likeness',
+                answer: '1. "like" (analogy: swims like a fish)\n2. "the same (as)" (exact identity: the same degree of improvement as)\n3. "similar to" (resemblance: similar to his last film)'
+            }
+        ];
+
+        const PRACTICE_QUESTIONS = [
+            {
+                id: 'pq_1',
+                englishLabel: 'Prohibited Comparative Intensifier Test',
+                question: 'Which of the following sentences correctly expresses a degree comparison without grammar errors?',
+                options: [
+                    'The number of participants this year was very lower than expected.',
+                    'The number of participants this year was significantly lower than expected.',
+                    'The number of participants this year was more lower than expected.',
+                    'The number of participants this year was very much lower than expected.'
+                ],
+                correct: 1,
+                explanation: '"Very" cannot directly modify a comparative adjective like "lower". "Significantly lower" or "much lower" is required.'
+            },
+            {
+                id: 'pq_2',
+                englishLabel: 'Discrete vs. Continuous Quantity Test',
+                question: 'Fill in the blanks: "25 years ago, _____ women ran marathons, so there was _____ information available."',
+                options: [
+                    'fewer / less',
+                    'less / fewer',
+                    'fewer / fewer',
+                    'less / less'
+                ],
+                correct: 0,
+                explanation: '"Women" is a plural countable noun requiring "fewer". "Information" is an uncountable mass noun requiring "less".'
+            },
+            {
+                id: 'pq_3',
+                englishLabel: 'Parallel Synchronized Variation Test',
+                question: 'Choose the correct correlated structure:',
+                options: [
+                    'As longer athletes compete, as greater their chances are.',
+                    'The longer athletes keep competing, the greater their chances of setting records.',
+                    'More long athletes compete, more great their chances.',
+                    'Longer athletes keep competing, greater their chances are.'
+                ],
+                correct: 1,
+                explanation: 'The parallel dynamic variation pattern requires "the + comparative ..., the + comparative ...".'
+            },
+            {
+                id: 'pq_4',
+                englishLabel: 'Superlative Modifier Subset Test',
+                question: 'Identify the correct superlative expression with plural noun agreement:',
+                options: [
+                    'Tamsin is one of the most generous person I know.',
+                    'Tamsin is one of the most generous people I know.',
+                    'Tamsin is one of most generous people I know.',
+                    'Tamsin is the most generous people I know.'
+                ],
+                correct: 1,
+                explanation: 'The structure "one of the + superlative" must be followed by a PLURAL noun ("people", not "person").'
+            }
+        ];
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('mindmap'); // 'mindmap' | 'flashcards' | 'practice' | 'summary'
+            const [userNotes, setUserNotes] = useState(() => {
+                try {
+                    const saved = localStorage.getItem('visual_grammar_user_notes');
+                    return saved ? JSON.parse(saved) : {};
+                } catch (e) {
+                    return {};
+                }
+            });
+            const [cardFilter, setCardFilter] = useState('All');
+
+            // Flashcard State
+            const [currentFcIndex, setCurrentFcIndex] = useState(0);
+            const [isFlipped, setIsFlipped] = useState(false);
+            const [confidenceScores, setConfidenceScores] = useState({});
+
+            // Quiz Practice State
+            const [userAnswers, setUserAnswers] = useState({});
+            const [quizSubmitted, setQuizSubmitted] = useState(false);
+
+            // Save notes handler
+            const handleNoteChange = (moduleId, text) => {
+                const updated = { ...userNotes, [moduleId]: text };
+                setUserNotes(updated);
+                try {
+                    localStorage.setItem('visual_grammar_user_notes', JSON.stringify(updated));
+                } catch (e) {
+                    console.error("Storage error:", e);
+                }
+            };
+
+            const filteredModules = useMemo(() => {
+                if (cardFilter === 'All') return GRAMMAR_DATA;
+                return GRAMMAR_DATA.filter(m => m.englishCategory === cardFilter);
+            }, [cardFilter]);
+
+            // Calculate overall progress stats
+            const totalNotesWritten = Object.values(userNotes).filter(n => n && n.trim().length > 0).length;
+            const scoreCount = Object.keys(confidenceScores).length;
+
+            return (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    {/* Header Banner */}
+                    <header className="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-stone-200/80 mb-8">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="px-3 py-1 bg-amber-100 text-amber-900 text-xs font-bold rounded-full uppercase tracking-wider">
+                                        Visual Learner Interactive Hub
+                                    </span>
+                                    <span className="px-3 py-1 bg-emerald-100 text-emerald-900 text-xs font-bold rounded-full uppercase tracking-wider">
+                                        100% Extracted Knowledge
+                                    </span>
+                                </div>
+                                <h1 className="text-3xl sm:text-4xl font-extrabold font-display text-stone-900 tracking-tight">
+                                    Visual Grammar Master
+                                </h1>
+                                <p className="text-stone-600 mt-1 text-sm sm:text-base font-medium">
+                                    Master comparative & superlative structures through Native Logic, Active Recall, and visual mindmaps.
+                                </p>
+                            </div>
+
+                            {/* Quick Stats Widget */}
+                            <div className="flex items-center gap-3 bg-cream-100 p-3.5 rounded-2xl border border-cream-200 self-start md:self-auto">
+                                <div className="text-center px-3 border-r border-stone-300/60">
+                                    <span className="block text-xl font-bold text-stone-900">{GRAMMAR_DATA.length}</span>
+                                    <span className="text-[11px] text-stone-500 font-semibold uppercase">Modules</span>
+                                </div>
+                                <div className="text-center px-3 border-r border-stone-300/60">
+                                    <span className="block text-xl font-bold text-amber-700">{totalNotesWritten} / 5</span>
+                                    <span className="text-[11px] text-stone-500 font-semibold uppercase">Notes Saved</span>
+                                </div>
+                                <div className="text-center px-3">
+                                    <span className="block text-xl font-bold text-emerald-700">{scoreCount} / {FLASHCARDS.length}</span>
+                                    <span className="text-[11px] text-stone-500 font-semibold uppercase">Cards Rated</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Navigation Tabs */}
+                        <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-stone-100">
+                            <button 
+                                onClick={() => setActiveTab('mindmap')}
+                                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center gap-2 ${
+                                    activeTab === 'mindmap' 
+                                    ? 'bg-amber-900 text-white shadow-md shadow-amber-900/10' 
+                                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                                }`}
+                            >
+                                🧠 Visual Knowledge Map & Notes
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('flashcards')}
+                                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center gap-2 ${
+                                    activeTab === 'flashcards' 
+                                    ? 'bg-amber-900 text-white shadow-md shadow-amber-900/10' 
+                                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                                }`}
+                            >
+                                🎴 Active Recall Flashcards
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('practice')}
+                                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center gap-2 ${
+                                    activeTab === 'practice' 
+                                    ? 'bg-amber-900 text-white shadow-md shadow-amber-900/10' 
+                                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                                }`}
+                            >
+                                ✍️ Interactive Practice Suite
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('summary')}
+                                className={`px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center gap-2 ${
+                                    activeTab === 'summary' 
+                                    ? 'bg-amber-900 text-white shadow-md shadow-amber-900/10' 
+                                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                                }`}
+                            >
+                                📊 Note Overview & Mastery
+                            </button>
+                        </div>
+                    </header>
+
+                    {/* TAB 1: VISUAL MIND MAP & KNOWLEDGE CARDS */}
+                    {activeTab === 'mindmap' && (
+                        <div className="space-y-8">
+                            {/* Filter Bar */}
+                            <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl card-shadow border border-stone-200">
+                                <div className="flex items-center gap-2">
+                                    <span className="text-xs font-bold text-stone-500 uppercase tracking-wider">English Category Filter:</span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {['All', 'Comparing Adjectives', 'Comparing Adverbs', 'Other Ways of Comparing', 'Comparing Quantities', 'Grammar Extra: Comparing Nouns'].map(cat => (
+                                            <button
+                                                key={cat}
+                                                onClick={() => setCardFilter(cat)}
+                                                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                                                    cardFilter === cat
+                                                    ? 'bg-stone-900 text-white'
+                                                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                                                }`}
+                                            >
+                                                {cat}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                                <span className="text-xs text-stone-400 font-medium">Showing {filteredModules.length} Grammar Modules</span>
+                            </div>
+
+                            {/* Grammar Modules Loop */}
+                            {filteredModules.map((module) => (
+                                <section key={module.id} className="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-stone-200 space-y-6">
+                                    {/* Module Header */}
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-100 pb-5">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase border ${module.badgeColor}`}>
+                                                    Section {module.sectionNumber}
+                                                </span>
+                                                <span className="text-xs font-semibold text-stone-400 uppercase tracking-wider">
+                                                    English Keyword Label: <strong className="text-stone-700">{module.tag}</strong>
+                                                </span>
+                                            </div>
+                                            <h2 className="text-2xl font-bold font-display text-stone-900">
+                                                {module.englishCategory}
+                                            </h2>
+                                        </div>
+                                    </div>
+
+                                    {/* Native Logic Visual Breakdown */}
+                                    <div className={`p-5 sm:p-6 rounded-2xl border ${module.borderColor} ${module.accentBg} space-y-3`}>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-lg">💡</span>
+                                            <h3 className="font-bold text-stone-900 text-base">
+                                                {module.nativeLogic.title}
+                                            </h3>
+                                        </div>
+                                        <p className="text-stone-700 text-sm leading-relaxed font-medium">
+                                            {module.nativeLogic.coreConcept}
+                                        </p>
+                                        <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-xl border border-stone-200/60 font-mono text-xs text-stone-800 whitespace-pre-line">
+                                            {module.nativeLogic.visualMetaphor}
+                                        </div>
+                                        <div className="pt-2">
+                                            <span className="text-xs font-bold text-stone-600 uppercase tracking-wider block mb-1.5">Native Intuition Key Points:</span>
+                                            <ul className="list-disc list-inside space-y-1 text-xs text-stone-700">
+                                                {module.nativeLogic.keyInsights.map((insight, idx) => (
+                                                    <li key={idx}><span className="font-medium">{insight}</span></li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    {/* Grammar Tables */}
+                                    {module.tables && module.tables.map((tbl, idx) => (
+                                        <div key={idx} className="space-y-3">
+                                            <h4 className="font-bold text-sm text-stone-800 flex items-center gap-2">
+                                                <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                                                {tbl.title}
+                                            </h4>
+                                            <div className="overflow-x-auto rounded-2xl border border-stone-200">
+                                                <table className="w-full text-left border-collapse text-sm">
+                                                    <thead>
+                                                        <tr className="bg-stone-100 text-stone-700 font-bold border-b border-stone-200 text-xs uppercase tracking-wider">
+                                                            {tbl.headers.map((h, i) => (
+                                                                <th key={i} className="p-3.5">{h}</th>
+                                                            ))}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-stone-100 font-medium">
+                                                        {tbl.rows.map((row, rIdx) => (
+                                                            <tr key={rIdx} className="hover:bg-cream-50/60 transition-colors">
+                                                                <td className="p-3.5 font-semibold text-stone-900 bg-stone-50/50">{row.type}</td>
+                                                                <td className="p-3.5 text-amber-900 font-semibold">{row.comp}</td>
+                                                                <td className="p-3.5 text-purple-900 font-semibold">{row.sup}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    {/* Subsections & Detailed Rules */}
+                                    <div className="space-y-5 pt-2">
+                                        {module.subsections.map((sub, sIdx) => (
+                                            <div key={sIdx} className="bg-cream-50/50 p-5 rounded-2xl border border-cream-200 space-y-4">
+                                                <div className="flex items-center justify-between">
+                                                    <h4 className="font-bold text-stone-900 text-base">
+                                                        {sub.title}
+                                                    </h4>
+                                                    <span className="text-xs font-semibold px-2.5 py-1 bg-stone-200 text-stone-700 rounded-lg">
+                                                        Keyword: {sub.englishKeyword}
+                                                    </span>
+                                                </div>
+
+                                                <div className="space-y-3">
+                                                    {sub.rules.map((rule, rIdx) => (
+                                                        <div key={rIdx} className="space-y-2">
+                                                            {rule.isWarning ? (
+                                                                <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-xs sm:text-sm text-rose-900 font-semibold flex items-start gap-2">
+                                                                    <span className="text-base">⚠️</span>
+                                                                    <div>
+                                                                        <strong>{rule.textWarning}</strong>
+                                                                        <div className="mt-1 font-mono text-xs text-rose-800">
+                                                                            {rule.examples.map((ex, exI) => (
+                                                                                <div key={exI}>{ex}</div>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                <p className="text-sm font-semibold text-stone-800">
+                                                                    {rule.text}
+                                                                </p>
+                                                            )}
+
+                                                            {rule.bulletPoints && (
+                                                                <div className="ml-4 space-y-2">
+                                                                    {rule.bulletPoints.map((bp, bIdx) => (
+                                                                        <div key={bIdx} className="bg-white p-3 rounded-xl border border-stone-200 text-xs sm:text-sm">
+                                                                            <span className="font-bold text-stone-900 block mb-1">
+                                                                                🔹 {bp.label}
+                                                                            </span>
+                                                                            {bp.examples.map((ex, eIdx) => (
+                                                                                <p key={eIdx} className="italic text-stone-600 ml-4 font-mono">
+                                                                                    "{ex}"
+                                                                                </p>
+                                                                            ))}
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+
+                                                            {rule.examples && !rule.isWarning && (
+                                                                <div className="ml-2 space-y-1">
+                                                                    {rule.examples.map((ex, eIdx) => (
+                                                                        <div key={eIdx} className="flex items-start gap-2 text-xs sm:text-sm font-mono text-amber-900 bg-amber-50/60 px-3 py-1.5 rounded-lg border border-amber-100">
+                                                                            <span className="text-amber-500 font-bold">👉</span>
+                                                                            <span>{ex}</span>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* MANDATORY USER NOTE BOX */}
+                                    <div className="pt-4 border-t border-stone-100">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <label className="text-xs font-extrabold text-stone-700 uppercase tracking-wider flex items-center gap-1.5">
+                                                <span>📝</span>
+                                                <span>Your Personal Learner Notes for Section {module.sectionNumber}</span>
+                                            </label>
+                                            <span className="text-[11px] text-stone-400 font-medium">Auto-saves locally</span>
+                                        </div>
+                                        <textarea
+                                            rows="3"
+                                            value={userNotes[module.id] || ''}
+                                            onChange={(e) => handleNoteChange(module.id, e.target.value)}
+                                            placeholder={`Write your personal memory hooks, extra examples, or native logic reminders for ${module.englishCategory}...`}
+                                            className="w-full p-3.5 bg-cream-50/70 rounded-2xl border border-cream-200 focus:bg-white focus:border-amber-400 focus:ring-2 focus:ring-amber-200 outline-none text-sm text-stone-800 placeholder-stone-400 transition-all font-sans"
+                                        ></textarea>
+                                    </div>
+                                </section>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* TAB 2: ACTIVE RECALL FLASHCARDS */}
+                    {activeTab === 'flashcards' && (
+                        <div className="max-w-3xl mx-auto space-y-6">
+                            <div className="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-stone-200 text-center space-y-6">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-900 rounded-full">
+                                        Card {currentFcIndex + 1} of {FLASHCARDS.length}
+                                    </span>
+                                    <span className="text-xs font-semibold text-stone-500">
+                                        Category: <strong className="text-stone-800">{FLASHCARDS[currentFcIndex].category}</strong>
+                                    </span>
+                                </div>
+
+                                {/* Flashcard Flip Interface */}
+                                <div 
+                                    onClick={() => setIsFlipped(!isFlipped)}
+                                    className={`min-h-[260px] p-8 rounded-3xl border-2 transition-all cursor-pointer flex flex-col items-center justify-center text-center relative ${
+                                        isFlipped 
+                                        ? 'bg-amber-50/60 border-amber-300 text-stone-900' 
+                                        : 'bg-white border-stone-200 hover:border-amber-300 hover:shadow-lg'
+                                    }`}
+                                >
+                                    {!isFlipped ? (
+                                        <div className="space-y-4">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-3 py-1 rounded-md">
+                                                Active Recall Prompt
+                                            </span>
+                                            <h3 className="text-xl sm:text-2xl font-extrabold font-display text-stone-900">
+                                                {FLASHCARDS[currentFcIndex].question}
+                                            </h3>
+                                            <p className="text-xs text-stone-400 font-medium italic">
+                                                💡 Hint: {FLASHCARDS[currentFcIndex].hint}
+                                            </p>
+                                            <p className="text-xs font-semibold text-amber-800 pt-4">
+                                                (Click card to reveal Native Answer & Logic)
+                                            </p>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-md">
+                                                Native Logic Explanation
+                                            </span>
+                                            <p className="text-base sm:text-lg font-semibold text-stone-800 whitespace-pre-line text-left leading-relaxed">
+                                                {FLASHCARDS[currentFcIndex].answer}
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Confidence Self-Rating */}
+                                {isFlipped && (
+                                    <div className="pt-4 border-t border-stone-100 space-y-3">
+                                        <span className="text-xs font-bold uppercase text-stone-500 tracking-wider block">
+                                            Rate your Active Recall Confidence:
+                                        </span>
+                                        <div className="flex justify-center gap-3">
+                                            <button
+                                                onClick={() => {
+                                                    setConfidenceScores({ ...confidenceScores, [FLASHCARDS[currentFcIndex].id]: 'Hard' });
+                                                    if (currentFcIndex < FLASHCARDS.length - 1) {
+                                                        setCurrentFcIndex(currentFcIndex + 1);
+                                                        setIsFlipped(false);
+                                                    }
+                                                }}
+                                                className="px-4 py-2 bg-rose-100 hover:bg-rose-200 text-rose-900 text-xs font-bold rounded-xl transition-all"
+                                            >
+                                                😓 Hard (Review Soon)
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    setConfidenceScores({ ...confidenceScores, [FLASHCARDS[currentFcIndex].id]: 'Medium' });
+                                                    if (currentFcIndex < FLASHCARDS.length - 1) {
+                                                        setCurrentFcIndex(currentFcIndex + 1);
+                                                        setIsFlipped(false);
+                                                    }
+                                                }}
+                                                className="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold rounded-xl transition-all"
+                                            >
+                                                🤔 Medium
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    setConfidenceScores({ ...confidenceScores, [FLASHCARDS[currentFcIndex].id]: 'Easy' });
+                                                    if (currentFcIndex < FLASHCARDS.length - 1) {
+                                                        setCurrentFcIndex(currentFcIndex + 1);
+                                                        setIsFlipped(false);
+                                                    }
+                                                }}
+                                                className="px-4 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 text-xs font-bold rounded-xl transition-all"
+                                            >
+                                                🎉 Easy (Mastered)
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Controls */}
+                                <div className="flex items-center justify-between pt-2">
+                                    <button
+                                        disabled={currentFcIndex === 0}
+                                        onClick={() => {
+                                            setCurrentFcIndex(currentFcIndex - 1);
+                                            setIsFlipped(false);
+                                        }}
+                                        className="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold disabled:opacity-40"
+                                    >
+                                        ← Previous Card
+                                    </button>
+                                    <button
+                                        disabled={currentFcIndex === FLASHCARDS.length - 1}
+                                        onClick={() => {
+                                            setCurrentFcIndex(currentFcIndex + 1);
+                                            setIsFlipped(false);
+                                        }}
+                                        className="px-4 py-2 rounded-xl bg-stone-900 text-white text-xs font-bold hover:bg-stone-800 disabled:opacity-40"
+                                    >
+                                        Next Card →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* TAB 3: INTERACTIVE PRACTICE SUITE */}
+                    {activeTab === 'practice' && (
+                        <div className="max-w-4xl mx-auto space-y-6">
+                            <div className="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-stone-200 space-y-6">
+                                <div>
+                                    <h2 className="text-2xl font-bold font-display text-stone-900">
+                                        Grammar Mastery Practice
+                                    </h2>
+                                    <p className="text-sm text-stone-500 mt-1">
+                                        Test your recall against precise native grammar rules extracted from your uploaded images.
+                                    </p>
+                                </div>
+
+                                <div className="space-y-6">
+                                    {PRACTICE_QUESTIONS.map((q, qIdx) => (
+                                        <div key={q.id} className="p-5 rounded-2xl bg-cream-50/50 border border-cream-200 space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-xs font-extrabold px-2.5 py-0.5 bg-stone-200 text-stone-700 rounded-md uppercase">
+                                                    Question {qIdx + 1} • {q.englishLabel}
+                                                </span>
+                                            </div>
+
+                                            <p className="text-base font-bold text-stone-900">
+                                                {q.question}
+                                            </p>
+
+                                            <div className="grid grid-cols-1 gap-2 pt-2">
+                                                {q.options.map((opt, oIdx) => {
+                                                    const isSelected = userAnswers[q.id] === oIdx;
+                                                    const isCorrect = q.correct === oIdx;
+                                                    let btnStyle = 'bg-white border-stone-200 text-stone-800 hover:border-amber-300';
+
+                                                    if (quizSubmitted) {
+                                                        if (isCorrect) btnStyle = 'bg-emerald-100 border-emerald-400 text-emerald-900 font-bold';
+                                                        else if (isSelected) btnStyle = 'bg-rose-100 border-rose-400 text-rose-900 font-bold';
+                                                    } else if (isSelected) {
+                                                        btnStyle = 'bg-amber-100 border-amber-400 text-amber-900 font-bold';
+                                                    }
+
+                                                    return (
+                                                        <button
+                                                            key={oIdx}
+                                                            disabled={quizSubmitted}
+                                                            onClick={() => setUserAnswers({ ...userAnswers, [q.id]: oIdx })}
+                                                            className={`w-full text-left p-3.5 rounded-xl border text-sm transition-all flex items-center justify-between ${btnStyle}`}
+                                                        >
+                                                            <span>{opt}</span>
+                                                            {quizSubmitted && isCorrect && <span>✅</span>}
+                                                            {quizSubmitted && isSelected && !isCorrect && <span>❌</span>}
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+
+                                            {quizSubmitted && (
+                                                <div className="p-3 bg-white rounded-xl border border-stone-200 text-xs text-stone-700">
+                                                    <strong className="text-stone-900">Native Explanation:</strong> {q.explanation}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="pt-4 border-t border-stone-100 flex justify-end gap-3">
+                                    {!quizSubmitted ? (
+                                        <button
+                                            onClick={() => setQuizSubmitted(true)}
+                                            className="px-6 py-3 bg-amber-900 hover:bg-amber-800 text-white font-bold text-sm rounded-xl transition-all shadow-md"
+                                        >
+                                            Submit & Verify Answers
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => {
+                                                setQuizSubmitted(false);
+                                                setUserAnswers({});
+                                            }}
+                                            className="px-6 py-3 bg-stone-800 hover:bg-stone-700 text-white font-bold text-sm rounded-xl transition-all"
+                                        >
+                                            Try Again
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* TAB 4: PERSONAL NOTES OVERVIEW & MASTERY DASHBOARD */}
+                    {activeTab === 'summary' && (
+                        <div className="space-y-6">
+                            <div className="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-stone-200 space-y-6">
+                                <div className="flex items-center justify-between border-b border-stone-100 pb-4">
+                                    <div>
+                                        <h2 className="text-2xl font-bold font-display text-stone-900">
+                                            Personal Visual Study Notes Summary
+                                        </h2>
+                                        <p className="text-sm text-stone-500 mt-0.5">
+                                            Consolidated custom notes written for each section.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {GRAMMAR_DATA.map((module) => (
+                                        <div key={module.id} className="p-5 rounded-2xl bg-cream-50/70 border border-cream-200 space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-xs font-bold text-stone-800">
+                                                    Section {module.sectionNumber}: {module.englishCategory}
+                                                </span>
+                                                <span className="text-[11px] font-semibold px-2 py-0.5 bg-stone-200 rounded text-stone-600">
+                                                    {module.tag}
+                                                </span>
+                                            </div>
+
+                                            <div className="bg-white p-3.5 rounded-xl border border-stone-200/80 min-h-[90px] text-xs text-stone-700 whitespace-pre-wrap">
+                                                {userNotes[module.id] && userNotes[module.id].trim().length > 0 ? (
+                                                    userNotes[module.id]
+                                                ) : (
+                                                    <span className="text-stone-400 italic">No custom notes written for this section yet. Go to the Knowledge Map tab to add notes!</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
